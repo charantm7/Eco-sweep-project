@@ -10,8 +10,7 @@ import random
 from django.db.models import Q
 
 
-# Create your views here.
-os.environ["REPLICATE_API_TOKEN"] = "r8_3ppGXXZp8VSLLMgc37V1eLefKAPMVOr4GbCxO"
+
 
 def home(request):
     user = User.objects.all()
