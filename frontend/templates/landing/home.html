@@ -13,7 +13,11 @@
       {% if not user.is_authenticated %}
       <div class="container-1">
         <small class="open-sans">Authentication</small>
+<<<<<<< HEAD
         <!-- <a class="roboto-mono" style="width: 38%" href="{% url 'Auth' %}?action=signup">Get started</a> -->
+=======
+        <a class="roboto-mono" style="width: 38%" href="{% url 'Auth' %}?action=signup">Get started</a>
+>>>>>>> 91b3a01 (Your commit message)
       </div>
       <div class="container-2">
         <small class="open-sans">Secure</small>
@@ -22,6 +26,7 @@
       {% elif user.is_authenticated %}
       <div class="container-1">
         <small class="open-sans">{{user.username}}</small>
+<<<<<<< HEAD
         <!-- <a class="roboto-mono" style="width: 27%" href="{% url 'Dashboard' %}">Dashboard</a> -->
       </div>
       <div class="container-2">
@@ -29,6 +34,15 @@
         <!-- <a class="roboto-mono" href="{% url 'Chat-Landing' request.user.username  %}" style="width: 38.5%"
           >Try Demo Chat</a
         > -->
+=======
+        <a class="roboto-mono" style="width: 27%" href="{% url 'Dashboard' %}">Dashboard</a>
+      </div>
+      <div class="container-2">
+        <small class="open-sans">Chat</small>
+        <a class="roboto-mono" href="{% url 'Chat-Landing' request.user.username  %}" style="width: 38.5%"
+          >Try Demo Chat</a
+        >
+>>>>>>> 91b3a01 (Your commit message)
       </div>
       {% endif %}
     </div>

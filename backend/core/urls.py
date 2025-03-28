@@ -20,5 +20,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
+<<<<<<< HEAD
     # path('', include('chat_app.urls')),
+=======
+>>>>>>> 91b3a01 (Your commit message)
 ]

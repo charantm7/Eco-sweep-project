@@ -29,12 +29,22 @@ ALLOWED_HOSTS = ['127.0.0.1', 'vorex']
 ASGI_APPLICATION = 'core.asgi.application'
 
 
+<<<<<<< HEAD
+=======
+ALLOWED_HOSTS = ['127.0.0.1', 'vorex']
+ASGI_APPLICATION = 'core.asgi.application'
+
+
+>>>>>>> 91b3a01 (Your commit message)
 
 
 # Application definition
 
 INSTALLED_APPS = [
+<<<<<<< HEAD
 
+=======
+>>>>>>> 91b3a01 (Your commit message)
     'daphne',
     'channels',
     'django.contrib.admin',
@@ -44,11 +54,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+<<<<<<< HEAD
     'authentication',   
     'chat_app',
 
 
 
+=======
+    'authentication',
+    'chat_app',
+>>>>>>> 91b3a01 (Your commit message)
 ]
 
 MIDDLEWARE = [
@@ -67,12 +82,19 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels.layers.InMemoryChannelLayer",
     },
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 91b3a01 (Your commit message)
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [ PROJECT_ROOT / 'frontend/templates'],
+=======
+        'DIRS': [PROJECT_ROOT / 'frontend/templates'],
+>>>>>>> 91b3a01 (Your commit message)
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,7 +107,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'core.wsgi.application'
+STATICFILES_DIRS = [PROJECT_ROOT / "frontend/static"]
+
+
 
 STATICFILES_DIRS = [PROJECT_ROOT / "frontend/static"]
 
