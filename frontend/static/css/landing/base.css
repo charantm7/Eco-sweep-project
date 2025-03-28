@@ -81,7 +81,7 @@ body nav .nav-left {
   align-items: center;
 }
 body nav .nav-left img {
-  height: 40px;
+  height: 60px;
   width: 60px;
 }
 body nav .nav-left a {
@@ -289,7 +289,7 @@ body .footer .foot-left .logo {
   margin-left: 100px;
 }
 body .footer .foot-left .logo img {
-  height: 40px;
+  height: 60px;
   width: 60px;
 }
 body .footer .foot-left .logo p {
@@ -350,16 +350,6 @@ body .footer .foot-right [class^=r-] a {
   color: var(--lwhite);
   position: relative;
 }
-body .footer .foot-right [class^=r-] a:after {
-  content: " ";
-  position: absolute;
-  background-color: white;
-  left: 0;
-  width: 0;
-  height: 2px;
-  transition: 0.2s ease-in;
-  bottom: -5px;
-}
-body .footer .foot-right [class^=r-] a:hover:after {
-  width: 100%;
+body .footer .foot-right [class^=r-] a:hover {
+  text-decoration: underline;
 }/*# sourceMappingURL=base.css.map */

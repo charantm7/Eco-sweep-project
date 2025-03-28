@@ -90,7 +90,7 @@ body {
       align-items: center;
 
       img {
-        height: 40px;
+        height: 60px;
         width: 60px;
       }
       a {
@@ -316,7 +316,7 @@ body {
         align-items: center;
         margin-left: 100px;
         img {
-          height: 40px;
+          height: 60px;
           width: 60px;
         }
         p {
@@ -380,19 +380,22 @@ body {
           color: var(--lwhite);
           position: relative;
         }
-        a:after {
-          content: " ";
-          position: absolute;
-          background-color: white;
-          left: 0;
-          width: 0;
-          height: 2px;
-          transition: 0.2s ease-in;
-          bottom: -5px;
+        a:hover {
+          text-decoration: underline;
         }
-        a:hover:after {
-          width: 100%;
-        }
+        // a:after {
+        //   content: " ";
+        //   position: absolute;
+        //   background-color: white;
+        //   left: 0;
+        //   width: 0;
+        //   height: 2px;
+        //   transition: 0.2s ease-in;
+        //   bottom: -5px;
+        // }
+        // a:hover:after {
+        //   width: 100%;
+        // }
       }
     }
   }

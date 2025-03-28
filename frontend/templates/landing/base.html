@@ -22,7 +22,7 @@
   <body>
     <nav class="fixed-top" id="navbar">
       <div class="nav-left">
-        <img src="{% static 'assets/logo-main.png' %}" alt=".." />
+        <img src="{% static 'assets/main_logo.png' %}" alt=".." />
         <a href="{% url 'Home'%}" class="orbitron">Veritas AI</a>
       </div>
       <div class="nav-right roboto-mono">
@@ -31,22 +31,22 @@
         <a href="#">Features</a>
         <a href="#">How it works</a>
         <a href="#">Contact</a>
-        <!-- <a href="{% url 'Auth' %}?action=login">Login</a>
-        <a href="{% url 'Auth' %}?action=signup"> Register</a> -->
+        <a href="{% url 'Auth' %}?action=login">Login</a>
+        <a href="{% url 'Auth' %}?action=signup"> Register</a>
         {% elif user.is_authenticated %} {% if not user.is_superuser %}
         <a href="/">Home</a>
-        <!-- <a href="{% url 'Dashboard' %}">Dashboard</a>
-        <a href="{% url 'Chat-Landing' request.user.username %}">Try Chat</a> -->
+        <a href="{% url 'Dashboard' %}">Dashboard</a>
+        <a href="{% url 'Chat-Landing' request.user.username %}">Try Chat</a>
         <a href="#">Reports</a>
         <a href="#">Alerts</a>
-        <!-- <a href="{% url 'User-Logout' %}">Logout</a> -->
+        <a href="{% url 'User-Logout' %}">Logout</a>
         {% elif user.is_superuser %}
         <a href="/">Home</a>
         <a href="#">Admin Dashboard</a>
         <a href="#">User Management</a>
         <a href="#">Simulation Logs</a>
         <a href="#">Reports</a>
-        <!-- <a href="{% url 'User-Logout' %}">Logout</a> -->
+        <a href="{% url 'User-Logout' %}">Logout</a>
         {% endif %} {% endif %}
 
         <div class="hamburger" id="hamburger" onclick="hamburger(this)" aria-label="Toggle Menu">
@@ -68,10 +68,7 @@
         <a href="#">Try Demo Chat</a>
         {% endif %}
       </div>
-      <div class="bottom">
-        <a href="#">Settings</a><a href="#">Profile</a>
-        <!-- <a href="{% url 'User-Logout' %}">Logout</a> -->
-      </div>
+      <div class="bottom"><a href="#">Settings</a><a href="#">Profile</a></div>
     </aside>
 
     {% if messages %} {% for message in messages %}
@@ -86,14 +83,14 @@
       <div class="footer">
         <div class="foot-left">
           <div class="logo">
-            <img src="{% static 'assets/logo-main.png'%}" alt="logo" />
-            <p class="orbitron">Trap Intel</p>
+            <img src="{% static 'assets/main_logo.png'%}" alt="logo" />
+            <p class="orbitron">Veritas AI</p>
           </div>
           <div class="icon-links">
             <i></i>
           </div>
           <div class="copyrights">
-            <p>&copy; 2025 <a href="/" class="orbitron">Trap Intel</a>. All rights reserved.</p>
+            <p>&copy; 2025 <a href="/" class="orbitron">Veritas AI</a>. All rights reserved.</p>
           </div>
           <div class="devcontact open-sans">
             <p>Developer contact:</p>
@@ -110,9 +107,9 @@
         <div class="foot-right">
           <div class="r-1 open-sans">
             <p><b>Capabilities</b></p>
-            <a href="#" style="width: 75%">vorex Bs</a>
-            <a href="#" style="width: 95%">vorex Cmp</a>
-            <a href="#" style="width: 75%">vorex Dc</a>
+            <a href="#" style="width: 100%">Fake New Detection</a>
+            <a href="#" style="width: 80%">Real Time Chat</a>
+            <a href="#" style="width: 60%">Reasoning</a>
           </div>
           <div class="r-2 open-sans">
             <p><b>Models</b></p>

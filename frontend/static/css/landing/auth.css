@@ -50,11 +50,7 @@
 }
 .main #login-form .body-left .login-container .login-top img {
   height: 45px;
-  width: 65px;
-}
-.main #login-form .body-left .login-container .login-top p {
-  font-size: 1.5vw;
-  margin-top: 15px;
+  width: 200px;
 }
 .main #login-form .body-left .login-container .login-mid {
   display: flex;
@@ -203,11 +199,7 @@
 }
 .main #signup-form .body-right .signup-container .signup-top img {
   height: 45px;
-  width: 65px;
-}
-.main #signup-form .body-right .signup-container .signup-top p {
-  font-size: 1.5vw;
-  margin-top: 15px;
+  width: 200px;
 }
 .main #signup-form .body-right .signup-container .signup-mid {
   display: flex;

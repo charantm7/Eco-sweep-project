@@ -3,15 +3,14 @@
 {% endblock %} {% block main %}
 <div class="main">
   <div class="bg-image">
-    <img class="landing-image" src="{% static 'assets/main1-bg.png'%}" alt="..." />
+    <img class="landing-image" src="{% static 'assets/phishing-bg.png'%}" alt="..." />
   </div>
   <form action="{% url 'User-Login' %}" id="login-form" method="post">
     {% csrf_token %}
     <div class="body-left">
       <div class="login-container">
         <div class="login-top">
-          <img src="{% static 'assets/logo-main.png'%}" alt="..." />
-          <p class="vorex orbitron">Trap Intel</p>
+          <img src="{% static 'assets/v_logo.png'%}" alt="..." />
         </div>
         <div class="login-mid">
           <label for="uname" class="quicksand">Username</label>
@@ -57,18 +56,17 @@
     <div class="body-right">
       <div class="signup-container">
         <div class="signup-top">
-          <img src="{% static 'assets/logo-main.png'%}" alt="..." />
-          <p class="vorex orbitron">Trap Intel</p>
+          <img src="{% static 'assets/v_logo.png'%}" alt="..." />
         </div>
         <div class="signup-mid">
           <label for="uname" class="quicksand">Username</label>
           <div class="user">
-            <input type="text" for="uname" placeholder="@trapintel" name="username" id="username" required />
+            <input type="text" for="uname" placeholder="@veritasai" name="username" id="username" required />
             <i class="fa-solid fa-user"></i>
           </div>
           <label for="email" class="quicksand">Email</label>
           <div class="email">
-            <input type="text" name="email" id="email" placeholder="e.g  trap@gmail.com" required />
+            <input type="text" name="email" id="email" placeholder="e.g  veritas@gmail.com" required />
             <i class="fa-solid fa-envelope"></i>
           </div>
           <label for="passowrd" class="quicksand">Password</label>
