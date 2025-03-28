@@ -29,7 +29,7 @@
 }
 .main #login-form .body-left {
   width: 50%;
-  padding: 5% 0 0 15%;
+  padding: 5% 0 0 5%;
 }
 .main #login-form .body-left .login-container {
   padding: 10% 10%;
@@ -38,7 +38,7 @@
   background-color: rgba(0, 0, 0, 0.467);
   border: 1px solid rgba(91, 91, 91, 0.442);
   border-radius: 10px;
-  width: 55%;
+  width: 70%;
   gap: 30px;
 }
 .main #login-form .body-left .login-container .login-top {
@@ -50,13 +50,14 @@
 }
 .main #login-form .body-left .login-container .login-top img {
   height: 45px;
-  width: 200px;
+  width: 170px;
 }
 .main #login-form .body-left .login-container .login-mid {
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 5px;
+  color: white;
 }
 .main #login-form .body-left .login-container .login-mid .user {
   display: flex;
@@ -110,6 +111,9 @@
   gap: 30px;
   width: 100%;
 }
+.main #login-form .body-left .login-container .login-bottom p {
+  color: white;
+}
 .main #login-form .body-left .login-container .login-bottom p a {
   text-decoration: none;
 }
@@ -136,6 +140,7 @@
   gap: 20px;
   padding: 10% 0 0 0;
   font-size: 1.5vw;
+  color: white;
 }
 .main #login-form .body-right .main-l {
   font-size: 2.4vw;
@@ -157,6 +162,7 @@
 }
 .main #signup-form .body-left {
   width: 50%;
+  color: white;
   padding: 0 0 0 5%;
   margin-left: 30px;
 }
@@ -176,7 +182,8 @@
 }
 .main #signup-form .body-right {
   width: 50%;
-  padding: 0 20% 0 5%;
+  padding: 0 0 0 5%;
+  color: white;
 }
 .main #signup-form .body-right .signup-container {
   width: 80%;
@@ -186,7 +193,7 @@
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  padding: 7% 15%;
+  padding: 7% 5%;
   margin-left: 20px;
   border-radius: 10px;
 }

@@ -33,7 +33,7 @@
 
     .body-left {
       width: 50%;
-      padding: 5% 0 0 15%;
+      padding: 5% 0 0 5%;
       // border: 1px solid white;
       .login-container {
         padding: 10% 10%;
@@ -43,7 +43,7 @@
         background-color: rgba(0, 0, 0, 0.467);
         border: 1px solid rgba(91, 91, 91, 0.442);
         border-radius: 10px;
-        width: 55%;
+        width: 70%;
         gap: 30px;
         .login-top {
           // border: 1px solid white;
@@ -55,7 +55,7 @@
 
           img {
             height: 45px;
-            width: 200px;
+            width: 170px;
           }
         }
         .login-mid {
@@ -64,6 +64,7 @@
           flex-direction: column;
           width: 100%;
           gap: 5px;
+          color: white;
           .user {
             display: flex;
             flex-direction: row;
@@ -119,6 +120,7 @@
           gap: 30px;
           width: 100%;
           p {
+            color: white;
             a {
               text-decoration: none;
             }
@@ -150,6 +152,7 @@
         gap: 20px;
         padding: 10% 0 0 0;
         font-size: 1.5vw;
+        color: white;
       }
       .main-l {
         font-size: 2.4vw;
@@ -173,6 +176,7 @@
     padding: 7% 0 4% 0;
     .body-left {
       width: 50%;
+      color: white;
       // border: 1px solid var(--lwhite);
       padding: 0 0 0 5%;
       margin-left: 30px;
@@ -193,8 +197,9 @@
     }
     .body-right {
       width: 50%;
-      padding: 0 20% 0 5%;
+      padding: 0 0 0 5%;
       // border: 1px solid var(--lwhite);
+      color: white;
 
       .signup-container {
         width: 80%;
@@ -205,7 +210,7 @@
         flex-direction: column;
         align-items: center;
         gap: 30px;
-        padding: 7% 15%;
+        padding: 7% 5%;
         margin-left: 20px;
         border-radius: 10px;
         .signup-top {

@@ -1,0 +1,37 @@
+{% extends 'landing/base.html' %} {% load static %} {% block main %}
+<div class="container mt-5">
+  <h2>Complaints List</h2>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Location</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>User ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- which use to create multiple of tables as per the complaints register -->
+      {% for complaint in complaints %}
+      <tr>
+        <td>{{ complaint.user.username }}</td>
+        <td>{{ complaint.location }}</td>
+        <td>{{ complaint.description }}</td>
+        <td>
+          {% if complaint.image %}
+
+          <!-- this line converts binary data into the base64 and display the image -->
+          <img src="{{ complaint.image.url }}" alt="Complaint Image" width="200" />
+          {% else %}
+          <p>No image available</p>
+          {% endif %}
+        </td>
+        <td>{{ complaint.user_id }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="/" class="btn btn-secondary mt-3">Back</a>
+</div>
+{% endblock %}

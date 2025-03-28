@@ -6,17 +6,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 import os
+import base64
+from .models import Complaint
+from django.core.files.base import ContentFile
+import base64
+import uuid
 
 
 # Create your views here.
 os.environ["REPLICATE_API_TOKEN"] = "r8_3ppGXXZp8VSLLMgc37V1eLefKAPMVOr4GbCxO"
 
 def home(request):
-    user = User.objects.all()
-    context = {
-        'users': user
-    }
-    return render(request, 'landing/home.html')
+    return render(request, 'landing/base.html')
 
 def auth(request):
     return render(request, 'landing/auth.html')
@@ -88,3 +89,47 @@ def user_logout(request):
         return redirect(f'{reverse("Auth")}?action=login')
 
 
+
+
+def raise_complaint(request):
+
+    return render(request, 'landing/raise_complaint.html')
+
+
+
+@login_required
+def submit_complaint(request):
+    if request.method == 'POST':
+        location = request.POST.get('location')
+        description = request.POST.get('description')
+        image_data = None
+
+        if 'cameraOutput' in request.POST and request.POST['cameraOutput']:
+            image_base64 = request.POST['cameraOutput'].split(',')[1]
+            image_data = base64.b64decode(image_base64)
+            file_name = f"complaint_{uuid.uuid4().hex}.png"
+
+        complaint = Complaint(
+            location=location,
+            description=description,
+            user=request.user
+        )
+
+        if image_data:
+            complaint.image.save(file_name, ContentFile(image_data), save=True)
+
+        complaint.save()
+
+        messages.success(request, 'Complaint submitted successfully!')
+        return redirect('Home')
+
+    return redirect('Home')
+
+
+def admin_dashboard(request):
+    complaint = Complaint.objects.all()
+
+    context = {'complaints':complaint,
+
+    }
+    return render(request, 'landing/dashboard.html', context)

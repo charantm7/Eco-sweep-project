@@ -1,0 +1,125 @@
+{% extends 'landing/base.html' %} {% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/landing/raise_complaint.css' %}" />
+{% endblock %} {% block main %}
+
+<form id="complaintForm" action="{% url 'Submit_complaint' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <div class="complaint-container">
+    <h2>Raise a Complaint</h2>
+
+    <!-- Geolocation Section -->
+    <label for="location">Location (Automatically Tagged):</label>
+    <input type="text" name="location" id="location" placeholder="Fetching your location..." readonly />
+    <button type="button" id="getLocation">Get My Location</button>
+
+    <!-- Camera Capture Section -->
+    <label for="camera">Capture an Image of the Issue:</label>
+    <video id="cameraStream" name="image" class="camera-preview" autoplay></video>
+    <button type="button" id="captureImage">Capture Image</button>
+    <canvas id="cameraOutput" class="camera-preview" style="display: none"></canvas>
+
+    <!-- Hidden field to store base64 image -->
+    <input type="hidden" name="cameraOutput" id="cameraOutput" />
+
+    <!-- Camera Switcher -->
+    <label for="cameraSwitch">Select Camera:</label>
+    <select id="cameraSwitch">
+      <option value="environment">Rear Camera</option>
+      <option value="user">Front Camera</option>
+    </select>
+
+    <!-- Upload Image -->
+    <label for="imageUpload">Or Upload an Image:</label>
+    <input type="file" name="image" id="imageUpload" accept="image/*" />
+
+    <!-- Description -->
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="4" placeholder="Describe the issue..."></textarea>
+
+    <!-- Submit Button -->
+    <button type="submit" id="submitComplaint">Submit Complaint</button>
+    <a href="/"><button type="button">Back</button></a>
+  </div>
+</form>
+
+{% endblock %} {% block script %}
+<script>
+  //js is from gpt :)
+  // Geolocation
+  const getLocationButton = document.getElementById("getLocation");
+  const locationInput = document.getElementById("location");
+
+  getLocationButton.addEventListener("click", () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          locationInput.value = `Lat: ${latitude}, Long: ${longitude}`;
+        },
+        () => {
+          locationInput.value = "Unable to fetch location.";
+        }
+      );
+    } else {
+      locationInput.value = "Geolocation is not supported by this browser.";
+    }
+  });
+
+  // Camera Access Variables
+  let stream;
+  const cameraStream = document.getElementById("cameraStream");
+  const cameraOutput = document.getElementById("cameraOutput");
+  const captureButton = document.getElementById("captureImage");
+  const canvas = cameraOutput.getContext("2d");
+  const cameraSwitch = document.getElementById("cameraSwitch");
+
+  // Function to access the selected camera
+  function accessCamera(facingMode) {
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+    }
+
+    const constraints = {
+      video: { facingMode: facingMode },
+    };
+
+    navigator.mediaDevices
+      .getUserMedia(constraints)
+      .then(function (mediaStream) {
+        stream = mediaStream;
+        cameraStream.srcObject = mediaStream;
+        cameraStream.play();
+      })
+      .catch(function (err) {
+        console.error("Error accessing camera: " + err);
+      });
+  }
+
+  // Initialize with front camera by default
+  accessCamera("environment");
+
+  // Event listener to switch between front and rear cameras
+  cameraSwitch.addEventListener("change", () => {
+    accessCamera(cameraSwitch.value);
+  });
+
+  // Capture Image
+  captureButton.addEventListener("click", () => {
+    cameraOutput.width = cameraStream.videoWidth;
+    cameraOutput.height = cameraStream.videoHeight;
+    canvas.drawImage(cameraStream, 0, 0, cameraOutput.width, cameraOutput.height);
+    cameraOutput.style.display = "block";
+    cameraStream.style.display = "none";
+
+    // Convert captured image to base64 and store it in a hidden input
+    const imageData = cameraOutput.toDataURL("image/png");
+    const hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = "cameraOutput";
+    hiddenInput.value = imageData;
+    document.getElementById("complaintForm").appendChild(hiddenInput);
+  });
+</script>
+
+{% endblock %}

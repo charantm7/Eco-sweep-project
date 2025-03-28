@@ -1,10 +1,11 @@
+// side bar system
+
 document.addEventListener("DOMContentLoaded", function () {
   const hamburger = document.getElementById("hamburger");
   const sidebar = document.getElementById("sidebar");
 
   hamburger.addEventListener("click", function () {
     sidebar.classList.toggle("open");
-    event.stopPropagation();
   });
   document.addEventListener("click", function (event) {
     if (!sidebar.contains(event.target) && event.target !== hamburger) {
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //   x.classList.toggle("change");
 // }
 
+// nav scroll system
 let lastScrollTop = 0;
 
 window.onscroll = function () {
