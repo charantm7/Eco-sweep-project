@@ -36,17 +36,6 @@
   font-style: normal;
 }
 
-#tooltip .tooltiptext {
-  visibility: hidden;
-  background-color: var(--trans);
-  font-size: 12px;
-  padding: 5px;
-}
-
-#tooltip:hover .tooltiptext {
-  visibility: visible;
-}
-
 :root {
   --body: #dbd3d0;
   --text: #1e1211;
@@ -66,7 +55,6 @@ html ::-webkit-scrollbar {
 body {
   background-color: var(--body);
   color: var(--body);
-  background-color: rgba(0, 0, 0, 0.958);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -112,10 +100,10 @@ body nav .nav-right a {
   text-decoration: none;
   color: var(--body);
   position: relative;
-  font-size: 17px;
+  font-size: 15px;
 }
 body nav .nav-right a:after {
-  content: " ";
+  content: "";
   position: absolute;
   background-color: white;
   height: 2px;
