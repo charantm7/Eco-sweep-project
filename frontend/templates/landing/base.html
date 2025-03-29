@@ -60,6 +60,7 @@
         {% elif user.is_superuser %}
         <a href="/">Home</a>
         <a href="{% url 'Dashboard' %}">Admin Dashboard</a>
+        <a href="{% url 'Cleaned'%}">Cleaned Images</a>
         <a href="{% url 'add_worker' %}">Add worker</a>
         <a href="#">User Management</a>
         <a href="#">Simulation Logs</a>
@@ -85,11 +86,6 @@
         <a href="{% url 'Raise-complaint' %}">Raise Complaint</a>
         <a href="#">Service</a>
         <a href="#">Track</a>
-        {% if request.user.is_superuser %}
-        <a href="#">Dashboard</a>
-
-        <a href="#">Try Demo Chat</a>
-        {% endif %}
       </div>
       <div class="bottom">
         <a href="#">Settings</a>

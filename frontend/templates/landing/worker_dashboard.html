@@ -27,6 +27,7 @@
                     <th>Image</th>
                     <th>Status</th>
                     <th>Action</th>
+                    <th>Cleaned Image</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +63,13 @@
                                 </option>
                             </select>
                             <button type="submit">Update</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="file" name="cleaned_image" required>
+                            <button type="submit">Upload</button>
                         </form>
                     </td>
                     

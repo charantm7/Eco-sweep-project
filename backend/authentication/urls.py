@@ -22,7 +22,14 @@ urlpatterns = [
     path('worker/update-complaint/<int:complaint_id>/', views.update_complaint_status, name="update_complaint_status"),
 
      path('complaint/delete/<int:complaint_id>/', views.delete_complaint, name='delete_complaint'),
+     
 
-      path('assign-worker/<int:complaint_id>/', views.assign_worker, name='assign_worker'),
-    
+     path('cleaned/',views.cleaned, name='Cleaned'),
+
+      path('review_cleaned_photo/<int:photo_id>/', views.review_cleaned_photo, name='review_cleaned_photo'),
+     
 ]
+
+      
+
+    

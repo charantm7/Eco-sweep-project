@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 import os
 import base64
-from .models import Complaint, Worker
+from .models import Complaint, Worker, CleanedPhoto
 from django.core.files.base import ContentFile
 import base64
 import uuid
@@ -16,6 +16,8 @@ from django.http import JsonResponse
 from geopy.exc import GeocoderTimedOut
 from django.contrib import messages
 from .forms import WorkerForm
+
+
 
 
 # Create your views here.
@@ -229,3 +231,40 @@ def assign_worker(request, complaint_id):
         return redirect('Dashboard')  # Redirect to the complaint list page
 
     return render(request, 'landing/assign.html', {'complaint': complaint, 'workers': workers}) 
+
+
+def upload_cleaned_photo(request, complaint_id):
+    complaint = get_object_or_404(Complaint, id=complaint_id, status="In Progress")
+
+    if request.method == "POST" and request.FILES.get("cleaned_image"):
+        image = request.FILES["cleaned_image"]
+        CleanedPhoto.objects.create(
+            worker=request.user,  # Assuming the worker is the logged-in user
+            complaint=complaint,
+            image=image,
+        )
+        return redirect("worker_dashboard")  # Redirect to worker's dashboard
+
+    return redirect("worker_dashboard")
+
+def review_cleaned_photo(request, photo_id):
+    photo = get_object_or_404(CleanedPhoto, id=photo_id)
+
+    if request.method == "POST":
+        new_status = request.POST.get("status")
+        photo.status = new_status
+        photo.save()
+
+        # If approved, mark complaint as resolved
+        if new_status == "Approved":
+            photo.complaint.status = "Resolved"
+            photo.complaint.save()
+
+        return redirect("review_cleaned_photo", photo_id)
+
+    return redirect("review_cleaned_photo",photo_id)
+    
+def cleaned(request):
+    cleaned_photo = CleanedPhoto.objects.all()
+    
+    return render(request, 'landing/clean.html', {'cleaned_photos':cleaned_photo})

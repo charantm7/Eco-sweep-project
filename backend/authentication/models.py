@@ -37,3 +37,15 @@ class Complaint(models.Model):
 
     def __str__(self):
         return f"Complaint {self.id} - {self.status}"
+    
+class CleanedPhoto(models.Model):
+    worker = models.ForeignKey(User, on_delete=models.CASCADE)
+    complaint = models.ForeignKey(Complaint, on_delete=models.CASCADE, related_name='cleaned_photos')
+    image = models.ImageField(upload_to='cleaned_photos/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(
+        max_length=20,
+        choices=[('Pending', 'Pending'), ('Approved', 'Approved'), ('Rejected', 'Rejected')],
+        default='Pending'
+    )
+    admin_comment = models.TextField(blank=True, null=True)

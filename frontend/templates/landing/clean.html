@@ -1,0 +1,37 @@
+{% extends 'landing/base.html' %} {% load static %} {% block main %}
+{% block link %}
+<style>
+    table{
+        margin-top: 20%;
+    }
+</style>
+{% endblock %}
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Complaint ID</th>
+        <th>Worker</th>
+        <th>Cleaned Image</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    {% for photo in cleaned_photos %}
+    <tr>
+        <td>{{ photo.complaint.id }}</td>
+        <td>{{ photo.worker.username }}</td>
+        <td><img src="{{ photo.image.url }}" width="100"></td>
+        <td>{{ photo.status }}</td>
+        <td>
+            <form action="{% url 'review_cleaned_photo' photo.id %}" method="post">
+                {% csrf_token %}
+                <select name="status">
+                    <option value="Pending" {% if photo.status == "Pending" %}selected{% endif %}>Pending</option>
+                    <option value="Approved" {% if photo.status == "Approved" %}selected{% endif %}>Approve</option>
+                    <option value="Rejected" {% if photo.status == "Rejected" %}selected{% endif %}>Reject</option>
+                </select>
+                <button type="submit">Update</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
