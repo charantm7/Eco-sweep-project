@@ -67,7 +67,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 5px 30px;
-    background: white;
+    background: rgba(252, 251, 251, 0.973);
     // backdrop-filter: blur(2px);
     // -webkit-backdrop-filter: blur(1px);
     color: black;
@@ -164,8 +164,8 @@ body {
     transition: 0.3s ease-in-out;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.936);
-    backdrop-filter: blur(1px);
+    background-color: rgba(255, 255, 255, 0.465);
+    backdrop-filter: blur(8px);
     height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
@@ -184,7 +184,7 @@ body {
         border-radius: 5px;
       }
       a:hover {
-        background-color: var(--trans-hover);
+        background-color: rgba(0, 0, 0, 0.384);
       }
     }
     .bottom {
@@ -213,6 +213,10 @@ body {
   }
   main {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #c0c0c0;
     #ideapage {
       .container {
         display: flex;

@@ -1,0 +1,77 @@
+{% extends 'landing/base.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/landing/worker_dashboard.css' %}">
+{% endblock %}
+{% block main %}
+<div class="dashboard-container">
+    <h2>Worker Dashboard</h2>
+
+    <!-- Worker Info -->
+    <div class="worker-info">
+        <h3>Welcome, {{ user.username }}</h3>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone:</strong> {{ user.worker_profile.phone }}</p>
+    </div>
+
+    <!-- Assigned Complaints -->
+    <h3>Assigned Complaints</h3>
+
+    {% if assigned_complaints %}
+        <table class="complaint-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for complaint in assigned_complaints %}
+                <tr>
+                    <td>{{ complaint.id }}</td>
+                    <td>{{ complaint.location }}</td>
+                    <td>{{ complaint.description }}</td>
+                    <td>
+                        {% if complaint.image %}
+                            <img src="{{ complaint.image.url }}" alt="Complaint Image" width="100">
+                        {% else %}
+                            <p>No image</p>
+                        {% endif %}
+                    </td>
+                    
+                    <td class="{% if complaint.status == 'In Progress' %}in-progress{% elif complaint.status == 'Pending' %}pending{% elif complaint.status == 'Completed' %}completed{% endif %}">
+                        {{ complaint.status }}
+                    </td>
+                    
+                    <td>
+                        <form action="{% url 'update_complaint_status' complaint.id %}" method="post">
+                            {% csrf_token %}
+                            <select name="status">
+                                <option value="Pending" {% if complaint.status == "Pending" %}selected{% endif %}>
+                                    Pending
+                                </option>
+                                <option value="In Progress" {% if complaint.status == "In Progress" %}selected{% endif %}>
+                                    In Progress
+                                </option>
+                                <option value="Completed" {% if complaint.status == "Completed" %}selected{% endif %}>
+                                    Completed
+                                </option>
+                            </select>
+                            <button type="submit">Update</button>
+                        </form>
+                    </td>
+                    
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No complaints assigned yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

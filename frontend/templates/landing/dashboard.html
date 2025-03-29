@@ -1,21 +1,28 @@
-{% extends 'landing/base.html' %} {% load static %} {% block main %}
-<div class="container mt-5">
+{% extends 'landing/base.html' %} {% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/landing/dashboard.css' %}" />
+{% endblock %} {% block main %}
+<div class="dash-container">
   <h2>Complaints List</h2>
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>User</th>
+        <th>Name</th>
         <th>Location</th>
         <th>Description</th>
         <th>Image</th>
+        <th>Status</th>
+        <th>Assign To</th>
         <th>User ID</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
       <!-- which use to create multiple of tables as per the complaints register -->
       {% for complaint in complaints %}
       <tr>
-        <td>{{ complaint.user.username }}</td>
+        <td><a href="{% url 'Profile' complaint.user.username %}">{{ complaint.user.username }}</a></td>
+        <td>{{ complaint.name }}</td>
         <td>{{ complaint.location }}</td>
         <td>{{ complaint.description }}</td>
         <td>
@@ -27,7 +34,25 @@
           <p>No image available</p>
           {% endif %}
         </td>
+        <td>{{complaint.status}}</td>
+        <td>
+          {% if not complaint.worker %}
+          <a href="{% url 'assign_worker' complaint.id %}"><button>Assign Worker</button></a>
+          {% else %}
+          <p>Assigned to: {{ complaint.worker.user.username }}</p>
+          {% endif %}
+        </td>
         <td>{{ complaint.user_id }}</td>
+        <td>
+          <form
+            action="{% url 'delete_complaint' complaint.id %}"
+            method="post"
+            onsubmit="return confirm('Are you sure you want to delete this complaint?');"
+          >
+            {% csrf_token %}
+            <button type="submit" class="delete-btn">Delete</button>
+          </form>
+        </td>
       </tr>
       {% endfor %}
     </tbody>

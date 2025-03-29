@@ -3,7 +3,7 @@
 {% endblock %} {% block main %}
 <div class="main">
   <div class="bg-image">
-    <img class="landing-image" src="{% static 'assets/phishing-bg.png'%}" alt="..." />
+    <img class="landing-image" src="{% static 'assets/main1-bg.png'%}" alt="..." />
   </div>
   <form action="{% url 'User-Login' %}" id="login-form" method="post">
     {% csrf_token %}
@@ -109,4 +109,4 @@
 </div>
 {% endblock %} {% block script %}
 <script src="{% static 'js/auth.js' %}"></script>
-{% endblock %}
+{% endblock %} {% block footer %} {% endblock %}

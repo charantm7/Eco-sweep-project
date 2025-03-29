@@ -8,6 +8,8 @@
   <div class="complaint-container">
     <h2>Raise a Complaint</h2>
 
+    <label for="name">Complaint Name</label>
+    <input type="text" name="name" placeholder="your complaint name" />
     <!-- Geolocation Section -->
     <label for="location">Location (Automatically Tagged):</label>
     <input type="text" name="location" id="location" placeholder="Fetching your location..." readonly />
@@ -46,16 +48,27 @@
 {% endblock %} {% block script %}
 <script>
   //js is from gpt :)
-  // Geolocation
   const getLocationButton = document.getElementById("getLocation");
   const locationInput = document.getElementById("location");
 
   getLocationButton.addEventListener("click", () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           const { latitude, longitude } = position.coords;
-          locationInput.value = `Lat: ${latitude}, Long: ${longitude}`;
+
+          try {
+            let response = await fetch(`/get-location/?lat=${latitude}&lon=${longitude}`);
+            let data = await response.json();
+
+            if (data.address) {
+              locationInput.value = data.address;
+            } else {
+              locationInput.value = "Location not found";
+            }
+          } catch (error) {
+            locationInput.value = "Error fetching location";
+          }
         },
         () => {
           locationInput.value = "Unable to fetch location.";

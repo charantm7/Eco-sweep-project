@@ -7,10 +7,15 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 import os
 import base64
-from .models import Complaint
+from .models import Complaint, Worker
 from django.core.files.base import ContentFile
 import base64
 import uuid
+from geopy.geocoders import Nominatim
+from django.http import JsonResponse
+from geopy.exc import GeocoderTimedOut
+from django.contrib import messages
+from .forms import WorkerForm
 
 
 # Create your views here.
@@ -100,6 +105,7 @@ def raise_complaint(request):
 @login_required
 def submit_complaint(request):
     if request.method == 'POST':
+        name = request.POST.get('name')
         location = request.POST.get('location')
         description = request.POST.get('description')
         image_data = None
@@ -110,6 +116,7 @@ def submit_complaint(request):
             file_name = f"complaint_{uuid.uuid4().hex}.png"
 
         complaint = Complaint(
+            name=name,
             location=location,
             description=description,
             user=request.user
@@ -133,3 +140,92 @@ def admin_dashboard(request):
 
     }
     return render(request, 'landing/dashboard.html', context)
+
+def get_location_name(request):
+    latitude = request.GET.get('lat')
+    longitude = request.GET.get('lon')
+
+    if not latitude or not longitude:
+        return JsonResponse({"error": "Invalid coordinates"}, status=400)
+
+    try:
+        # Use a unique user_agent to avoid being blocked
+        geolocator = Nominatim(user_agent="your_app_name", timeout=10)  
+        location = geolocator.reverse((latitude, longitude), exactly_one=True)
+
+        if location and location.address:
+            return JsonResponse({"address": location.address})
+        else:
+            return JsonResponse({"error": "Location not found"}, status=404)
+
+    except GeocoderTimedOut:
+        return JsonResponse({"error": "Geocoding service timed out"}, status=500)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+    
+def profile(request, u_name):
+    user = User.objects.get(username=request.user.username)
+    complaint = Complaint.objects.filter(user=user)
+    u_name = user
+    return render(request, 'landing/profile.html', {'user':user, 'complaints':complaint})
+
+
+@login_required
+def add_worker(request):
+    if request.method == "POST":
+        form = WorkerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Worker added successfully!")
+            return redirect("Home")  # Change this to your admin panel URL
+    else:
+        form = WorkerForm()
+    
+    return render(request, "landing/add_worker.html", {"form": form})
+
+@login_required
+def worker_dashboard(request):
+    # Fetch complaints assigned to the logged-in worker
+    assigned_complaints = Complaint.objects.filter(worker=request.user.worker_profile)
+    return render(request, 'landing/worker_dashboard.html', {'assigned_complaints': assigned_complaints})
+
+
+@login_required
+def update_complaint_status(request, complaint_id):
+    if request.method == "POST":
+        complaint = Complaint.objects.get(id=complaint_id)
+
+        if complaint.worker == request.user.worker_profile:
+            new_status = request.POST.get('status')
+            complaint.status = new_status
+            complaint.save()
+            messages.success(request, "Complaint status updated successfully!")
+        else:
+            messages.error(request, "You are not authorized to update this complaint.")
+
+    return redirect('worker_dashboard')
+
+def delete_complaint(request, complaint_id):
+    complaint = get_object_or_404(Complaint, id=complaint_id)
+    if request.method == 'POST':
+        complaint.delete()
+        messages.success(request, 'Complaint deleted successfully!')
+    return redirect('Dashboard') 
+
+def assign_worker(request, complaint_id):
+    complaint = get_object_or_404(Complaint, id=complaint_id)
+    workers = Worker.objects.all()
+
+    if request.method == 'POST':
+        worker_id = request.POST.get('worker')
+        if worker_id:
+            complaint.worker = get_object_or_404(Worker, id=worker_id)
+            complaint.status = "In Progress"  # Auto-update status
+            complaint.save()
+            messages.success(request, f'Complaint assigned to {complaint.worker.user.username}!')
+        else:
+            messages.error(request, "Please select a worker.")
+
+        return redirect('Dashboard')  # Redirect to the complaint list page
+
+    return render(request, 'landing/assign.html', {'complaint': complaint, 'workers': workers}) 

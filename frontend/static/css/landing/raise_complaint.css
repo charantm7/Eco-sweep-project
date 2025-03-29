@@ -1,8 +1,8 @@
 .complaint-container {
-  width: 50%;
+  width: 60%;
   margin: auto;
   padding: 20px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   margin-top: 100px;
@@ -42,7 +42,7 @@ button:hover {
 
 .camera-preview {
   width: 100%;
-  max-height: 300px;
+  max-height: 600px;
   -o-object-fit: cover;
      object-fit: cover;
   margin-bottom: 10px;

@@ -1,5 +1,18 @@
-body {
-  background-color: rgb(235, 230, 230);
-  padding: 30px;
+.dash-container {
+  padding: 5%;
+  width: 100vw;
+}
+.dash-container table {
   width: 100%;
+  padding-left: 0;
+}
+.dash-container table .delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.dash-container table .delete-btn:hover {
+  background-color: darkred;
 }/*# sourceMappingURL=dashboard.css.map */

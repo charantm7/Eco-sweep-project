@@ -1,0 +1,26 @@
+.add-worker-c {
+  padding: 5%;
+}
+.add-worker-c .worker-form {
+  width: 400px;
+  margin: auto;
+  border: 1px solid black;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.add-worker-c .worker-form .form-group {
+  margin-bottom: 15px;
+}
+.add-worker-c .worker-form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+.add-worker-c .worker-form input,
+.add-worker-c .worker-form textarea,
+.add-worker-c .worker-form select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}/*# sourceMappingURL=add_worker.css.map */

@@ -1,0 +1,64 @@
+{% extends 'landing/base.html' %}{% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/landing/profile.css' %}" />{% endblock %} {% block main %}
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <!-- Profile Picture -->
+      <img
+        src="{% static 'assets/main1.jpg'%}"
+        class="rounded-circle"
+        width="120"
+        height="120"
+        alt="Profile Picture"
+      />
+
+      <h3 class="mt-3">{{ user.username }}</h3>
+      <p class="text-muted">{{ user.email }}</p>
+      {% if user.worker_profile %}
+      <span class="worker-tag">Worker</span>
+      {% endif %}
+
+      <p><strong>Joined:</strong> {{ user.date_joined|date:"F d, Y" }}</p>
+
+      <p><strong>Phone:</strong> {{ user.worker_profile.phone }}</p>
+
+      <!-- Edit Profile & Logout -->
+      <a href="#" class="btn btn-primary mt-2">Edit Profile</a>
+      <a href="{% url 'User-Logout' %}" class="btn btn-danger mt-2">Logout</a>
+    </div>
+    <div class="complaint">
+      <div class="top">
+        <h3>Complaints</h3>
+        <button style="padding: 0 10px">
+          <a href="{% url 'Home' %}" style="text-decoration: none; color: black">Back</a>
+        </button>
+      </div>
+
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Assignee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- which use to create multiple of tables as per the complaints register -->
+          {% for complaint in complaints %}
+          <tr>
+            <td>{{ complaint.name }}</td>
+            <td>{{ complaint.location }}</td>
+            <td>{{ complaint.description }}</td>
+
+            <td>{{complaint.status}}</td>
+            <td>{{complaint.worker}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

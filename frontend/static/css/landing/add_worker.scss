@@ -1,0 +1,29 @@
+.add-worker-c {
+  padding: 5%;
+  .worker-form {
+    width: 400px;
+    margin: auto;
+    border: 1px solid black;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .worker-form .form-group {
+    margin-bottom: 15px;
+  }
+
+  .worker-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .worker-form input,
+  .worker-form textarea,
+  .worker-form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+}
