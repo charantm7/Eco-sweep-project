@@ -53,7 +53,7 @@
         <a href="{% url 'Auth' %}?action=signup"> Register</a>
         {% elif user.is_authenticated %} {% if not user.is_superuser and not user.worker_profile %}
         <a href="/">Home</a>
-        <a href="#">Try Chat</a>
+        <a href="{% url 'Raise-complaint' %}">Raise Complaint</a>
         <a href="#">Reports</a>
         <a href="#">Alerts</a>
         <a href="{% url 'User-Logout' %}">Logout</a>
@@ -124,8 +124,8 @@
             />
           </div>
           <div class="carousel-caption1 d-none d-md-block d-flex flex">
-            <p class="car-con-p" style="color: #fff">A remarkable solution for slip clean</p>
-            <h1 class="car-con-slogan">URBAN CLEAN AUTHORITY</h1>
+            <p class="car-con-p" style="color: white">A remarkable solution for slip clean</p>
+            <p class="car-con-slogan" style="font-size: 4vw; font-weight: 1000">URBAN CLEAN AUTHORITY</p>
             <button class="btn btn-primary">
               Explore
               <svg
